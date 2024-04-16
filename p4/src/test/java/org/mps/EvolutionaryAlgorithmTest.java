@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+import org.mps.selection.SelectionOperator;
 import org.mps.selection.TournamentSelection;
 import org.mps.mutation.MutationOperator;
 import org.mps.mutation.SwapMutation;
@@ -150,7 +150,7 @@ public class EvolutionaryAlgorithmTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        SelectionOperator expectedObject = tournamentSelection;
+        TournamentSelection expectedObject = tournamentSelection;
 
         SelectionOperator actualObject = eaTest.getSelectionOperator();
 
