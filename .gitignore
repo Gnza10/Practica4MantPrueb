@@ -15,3 +15,6 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+p4/src/.DS_Store
+p4/.vscode/settings.json
+p4/src/test/.DS_Store
