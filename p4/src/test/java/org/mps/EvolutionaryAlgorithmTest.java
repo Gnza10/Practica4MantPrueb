@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mps.selection.SelectionOperator;
 import org.mps.selection.TournamentSelection;
@@ -233,5 +234,84 @@ public class EvolutionaryAlgorithmTest {
     public void Test_OptimizeFila1Size0_ReturnException(){
         int[][] population = {{},{2}};
         assertThrows(EvolutionaryAlgorithmException.class, () -> ea.optimize(population));
+    }
+
+    @Nested
+    @DisplayName("Tests de los operadores")
+    public class tests_Selectores{
+        @Test
+        @DisplayName("Test de tournamentSelection con población 0")
+        public void testSelectionConstructor_EmptyPopulation_ReturnException() {
+            int[][] population = {};
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.setSelectionOperator(new TournamentSelection(0)));
+        }
+
+        @Test
+        @DisplayName("Test de seleccionar con población null")
+        public void testSelection_NullPopulation_ReturnException() {
+            int[] population = null;
+            
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getSelectionOperator().select(population));
+        }
+
+        @Test
+        @DisplayName("Test de seleccionar con población vacía")
+        public void testSelection_EmptyPopulation_ReturnException() {
+            int[] population = {};
+            
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getSelectionOperator().select(population));
+        }
+
+        @Test
+        @DisplayName("Test de mutar con población nula")
+        public void testMutation_NullPopulation_ReturnException() {
+            int[] population = null;
+
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getMutationOperator().mutate(population));
+        }
+
+        @Test
+        @DisplayName("Test de mutar con población vacía")
+        public void testMutation_EmptyPopulation_ReturnException() {
+            int[] population = {};
+
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getMutationOperator().mutate(population));
+        }
+
+        @Test
+        @DisplayName("Test de crossover con población nula en el primer padre")
+        public void testCrossover_NullPopulation1_ReturnException() {
+            int[] parent1 = null;
+            int[] parent2 = {1, 2, 3, 4};
+
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getCrossoverOperator().crossover(parent1, parent2));
+        }
+
+        @Test
+        @DisplayName("Test de crossover con población nula en el segundo padre")
+        public void testCrossover_NullPopulation2_ReturnException() {
+            int[] parent1 = {1, 2, 3, 4};
+            int[] parent2 = null;
+
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getCrossoverOperator().crossover(parent1, parent2));
+        }
+
+        @Test
+        @DisplayName("Test de crossover con población vacía en el primer padre")
+        public void testCrossover_EmptyPopulation1_ReturnException() {
+            int[] parent1 = {};
+            int[] parent2 = {1, 2, 3, 4};
+
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getCrossoverOperator().crossover(parent1, parent2));
+        }
+
+        @Test
+        @DisplayName("Test de crossover con población del primer padre de longitud no igual a la del segundo")
+        public void testCrossover_Population1SizeEqualsPopulation2Size_ReturnException() {
+            int[] parent1 = {1, 2, 3, 4};
+            int[] parent2 = {1, 2, 3, 4,5};
+
+            assertThrows(EvolutionaryAlgorithmException.class, () -> ea.getCrossoverOperator().crossover(parent1, parent2));
+        }
     }
 }
