@@ -105,7 +105,7 @@ public class EvolutionaryAlgorithmTest {
 
             ea.setSelectionOperator(sm);
         } catch (EvolutionaryAlgorithmException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         assertNotNull(ea.getMutationOperator());
@@ -128,7 +128,7 @@ public class EvolutionaryAlgorithmTest {
         try {
             eaTest = new EvolutionaryAlgorithm(new TournamentSelection(4), swapMutation,  new OnePointCrossover());
         } catch (EvolutionaryAlgorithmException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         MutationOperator expectedObject = swapMutation;
@@ -147,7 +147,7 @@ public class EvolutionaryAlgorithmTest {
             tournamentSelection = new TournamentSelection(4);
             eaTest = new EvolutionaryAlgorithm(tournamentSelection, new SwapMutation(),  new OnePointCrossover());
         } catch (EvolutionaryAlgorithmException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         TournamentSelection expectedObject = tournamentSelection;
@@ -165,7 +165,7 @@ public class EvolutionaryAlgorithmTest {
         try {
             eaTest = new EvolutionaryAlgorithm(new TournamentSelection(4), new SwapMutation(),  onePointCrossover);
         } catch (EvolutionaryAlgorithmException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         CrossoverOperator expectedObject = onePointCrossover;
@@ -186,7 +186,23 @@ public class EvolutionaryAlgorithmTest {
 
             assertEquals(population.length, result.length);
         } catch (EvolutionaryAlgorithmException e) {
-            // TODO Auto-generated catch block
+            
+            e.printStackTrace();
+        }        
+    }
+
+    @Test
+    @DisplayName("Test de optimize correcto")
+    public void testOptimize_Correct2() {
+        int[][] population = { { 5, 6, 7, 8 }, { 8, 4, 3, 4 }};
+        
+        int[][] result;
+        try {
+            result = ea.optimize(population);
+
+            assertEquals(population.length, result.length);
+        } catch (EvolutionaryAlgorithmException e) {
+            
             e.printStackTrace();
         }        
     }
